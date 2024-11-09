@@ -43,7 +43,8 @@ describe("Lock", function () {
       const { missionToken, missionReward, owner, userAccount } = await loadFixture(deployMissionRewards);
       console.log(missionReward.target);
       await missionToken.transfer(missionReward.target, 1000000000000000000000000n);
-      await missionReward.completeMission(userAccount.address, 1);
+      const missionId = ethers.id("manjik@gmail.com" + "mission101");
+      await missionReward.completeMission(userAccount.address, missionId);
 
       expect(await missionToken.balanceOf(userAccount.address)).to.equal(ethers.parseEther("10"));
     }

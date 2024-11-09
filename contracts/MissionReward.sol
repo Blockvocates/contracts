@@ -6,7 +6,9 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract MissionReward is Ownable {
-    mapping(address => mapping(uint256 => bool)) public completedMissions;
+    event MissionCompleted(address indexed user, bytes32 missionId, uint256 reward);
+
+    mapping(address => mapping(bytes32 => bool)) public completedMissions;
     uint256 public rewardAmount = 10 * 10**18; // 10 tokens per mission
     
     IERC20 public missionToken;
@@ -20,7 +22,7 @@ contract MissionReward is Ownable {
         rewardAmount = _amount;
     }
     
-    function completeMission(address user, uint256 missionId) external onlyOwner {
+    function completeMission(address user, bytes32 missionId) external onlyOwner {
         require(!completedMissions[user][missionId], "Mission already completed");
         completedMissions[user][missionId] = true;
         missionToken.transfer(user, rewardAmount);
@@ -28,5 +30,4 @@ contract MissionReward is Ownable {
         emit MissionCompleted(user, missionId, rewardAmount);
     }
     
-    event MissionCompleted(address indexed user, uint256 missionId, uint256 reward);
 }
