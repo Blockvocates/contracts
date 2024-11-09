@@ -22,7 +22,7 @@ contract MissionReward is Ownable {
         rewardAmount = _amount;
     }
     
-    function completeMission(address user, bytes32 missionId) external onlyOwner {
+    function completeMission(address user, bytes32 missionId) external {
         require(!completedMissions[user][missionId], "Mission already completed");
         completedMissions[user][missionId] = true;
         missionToken.transfer(user, rewardAmount);

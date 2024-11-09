@@ -2,13 +2,16 @@
   "name": "hardhat-project",
   "scripts": {
     "compile": "hardhat compile",
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "deployToken": "hardhat ignition deploy ./ignition/modules/MissionToken.js --network opencampus",
+    "deployMissionReward": "hardhat ignition deploy ./ignition/modules/MissionReward.js --network opencampus"
   },
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "hardhat": "^2.22.15"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^5.1.0"
+    "@openzeppelin/contracts": "^5.1.0",
+    "dotenv": "^16.4.5"
   }
 }
